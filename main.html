@@ -26,28 +26,34 @@
         <th>High</th>
     </tr>
     <tr>
-        <td>Complexity (30%)</td>
+        <td>Complexity (25%)</td>
         <td><input type="radio" name="complexity" value="1" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="complexity" value="5" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="complexity" value="13" onclick="calculateStoryPoints()"></td>
     </tr>
     <tr>
-        <td>Effort (30%)</td>
+        <td>Effort (25%)</td>
         <td><input type="radio" name="effort" value="1" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="effort" value="5" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="effort" value="13" onclick="calculateStoryPoints()"></td>
     </tr>
     <tr>
-        <td>Risk (20%)</td>
+        <td>Risk (15%)</td>
         <td><input type="radio" name="risk" value="1" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="risk" value="5" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="risk" value="13" onclick="calculateStoryPoints()"></td>
     </tr>
     <tr>
-        <td>Dependency (20%)</td>
+        <td>Dependency (15%)</td>
         <td><input type="radio" name="dependency" value="1" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="dependency" value="5" onclick="calculateStoryPoints()"></td>
         <td><input type="radio" name="dependency" value="13" onclick="calculateStoryPoints()"></td>
+    </tr>
+    <tr>
+        <td>Duration (20%) (minute(s), hour(s), day(s)</td>
+        <td><input type="radio" name="duration" value="1" onclick="calculateStoryPoints()"></td>
+        <td><input type="radio" name="duration" value="5" onclick="calculateStoryPoints()"></td>
+        <td><input type="radio" name="duration" value="13" onclick="calculateStoryPoints()"></td>
     </tr>
 </table>
 
@@ -71,17 +77,20 @@
         const effort = parseFloat(document.querySelector('input[name="effort"]:checked').value);
         const risk = parseFloat(document.querySelector('input[name="risk"]:checked').value);
         const dependency = parseFloat(document.querySelector('input[name="dependency"]:checked').value);
+        const duration = parseFloat(document.querySelector('input[name="duration"]:checked').value);
 
         // Calculate weighted average
-        const complexityWeight = 0.3;
-        const effortWeight = 0.3;
-        const riskWeight = 0.2;
-        const dependencyWeight = 0.2;
+        const complexityWeight = 0.25;
+        const effortWeight = 0.25;
+        const riskWeight = 0.15;
+        const dependencyWeight = 0.15;
+        const durationWeight = 0.2;
 
         const weightedPoints = (complexity * complexityWeight) +
                                (effort * effortWeight) +
                                (risk * riskWeight) +
-                               (dependency * dependencyWeight);
+                               (dependency * dependencyWeight) +
+                               (duration * durationWeight);
 
         // Round to the nearest Fibonacci number
         const storyPoints = nearestFibonacci(weightedPoints);
@@ -89,7 +98,7 @@
         // Display results
         document.getElementById('story-points').innerText = `Selected story points for each category:`;
         document.getElementById('details').innerHTML = `
-            <p>Complexity: ${complexity}, Effort: ${effort}, Risk: ${risk}, Dependency: ${dependency}</p>
+            <p>Complexity: ${complexity}, Effort: ${effort}, Risk: ${risk}, Dependency: ${dependency}, Duration: ${duration}</p>
             <p>Weighted Story Points: ${storyPoints}</p>
         `;
     }
